@@ -64,9 +64,9 @@
       transform: scale(1.1);
     }
 
-    /* Soft UI Design System Elements */
+    /* Soft UI Design System Elements with Exact Matching Gradient */
     .soft-bg {
-      background: linear-gradient(135deg, #b0b8cd 0%, #c8cfe0 50%, #d8deeb 100%);
+      background: linear-gradient(180deg, #D9DBFF 0%, #D9F5D3 100%);
     }
     .soft-card {
       background: rgba(243, 244, 248, 0.88);
@@ -75,15 +75,31 @@
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
     }
     .soft-button {
-      background: rgba(255, 255, 255, 0.9);
-      border: 1px solid rgba(210, 215, 230, 0.8);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
       transition: all 0.2s ease;
     }
     .soft-button:hover {
       background: #ffffff;
       transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+    }
+
+    /* Custom Upload Button Pill Matching User Wireframe */
+    .upload-pill-btn {
+      background: #ffffff;
+      color: #6b7280;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      border-radius: 9999px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+      transition: all 0.2s ease;
+    }
+    .upload-pill-btn:hover {
+      background: #f8fafc;
+      color: #4b5563;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
     }
     
     .color-picker-wrapper {
@@ -128,6 +144,56 @@
       border: var(--glass-border-width, 1px) solid rgba(255, 255, 255, var(--glass-border-opacity, 0.4));
       border-radius: 2rem;
     }
+
+    /* Kinetic Typography CSS Keyframe Animations */
+    @keyframes kinetic-blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.1; }
+    }
+    @keyframes kinetic-bounce {
+      0%, 100% { transform: translateY(0) scale(var(--scale-x, 1), 1); }
+      50% { transform: translateY(-24px) scale(var(--scale-x, 1), 1); }
+    }
+    @keyframes kinetic-shake {
+      0%, 100% { transform: translate(0, 0) scale(var(--scale-x, 1), 1); }
+      20% { transform: translate(-8px, 4px) skewX(6deg) scale(var(--scale-x, 1), 1); }
+      40% { transform: translate(8px, -4px) skewX(-6deg) scale(var(--scale-x, 1), 1); }
+      60% { transform: translate(-5px, -2px) scale(var(--scale-x, 1), 1); }
+      80% { transform: translate(5px, 2px) scale(var(--scale-x, 1), 1); }
+    }
+    @keyframes kinetic-wave {
+      0%, 100% { transform: translateY(0px) rotate(0deg) scale(var(--scale-x, 1), 1); }
+      25% { transform: translateY(-12px) rotate(-3deg) scale(var(--scale-x, 1), 1); }
+      75% { transform: translateY(12px) rotate(3deg) scale(var(--scale-x, 1), 1); }
+    }
+    @keyframes kinetic-rubber {
+      0% { transform: scale3d(var(--scale-x, 1), 1, 1); }
+      30% { transform: scale3d(calc(var(--scale-x, 1) * 1.25), 0.75, 1); }
+      40% { transform: scale3d(calc(var(--scale-x, 1) * 0.75), 1.25, 1); }
+      50% { transform: scale3d(calc(var(--scale-x, 1) * 1.15), 0.85, 1); }
+      65% { transform: scale3d(calc(var(--scale-x, 1) * 0.95), 1.05, 1); }
+      75% { transform: scale3d(calc(var(--scale-x, 1) * 1.05), 0.95, 1); }
+      100% { transform: scale3d(var(--scale-x, 1), 1, 1); }
+    }
+    @keyframes kinetic-swing {
+      20% { transform: rotate3d(0, 0, 1, 15deg) scale(var(--scale-x, 1), 1); }
+      40% { transform: rotate3d(0, 0, 1, -10deg) scale(var(--scale-x, 1), 1); }
+      60% { transform: rotate3d(0, 0, 1, 5deg) scale(var(--scale-x, 1), 1); }
+      80% { transform: rotate3d(0, 0, 1, -5deg) scale(var(--scale-x, 1), 1); }
+      100% { transform: rotate3d(0, 0, 1, 0deg) scale(var(--scale-x, 1), 1); }
+    }
+    @keyframes kinetic-trim {
+      0% { stroke-dashoffset: 500; fill-opacity: 0; }
+      50% { stroke-dashoffset: 0; fill-opacity: 0.2; }
+      100% { stroke-dashoffset: 0; fill-opacity: 1; }
+    }
+
+    .anim-blink { animation: kinetic-blink 1s infinite ease-in-out; }
+    .anim-bounce { animation: kinetic-bounce 0.8s infinite cubic-bezier(0.28, 0.84, 0.42, 1); }
+    .anim-shake { animation: kinetic-shake 0.5s infinite ease-in-out; }
+    .anim-wave { animation: kinetic-wave 2s infinite ease-in-out; }
+    .anim-rubber { animation: kinetic-rubber 1.2s infinite; }
+    .anim-swing { animation: kinetic-swing 1.5s infinite ease-in-out; transform-origin: top center; }
   </style>
 </head>
 <body class="soft-bg font-sans text-slate-700 min-h-screen flex flex-col md:flex-row overflow-x-hidden select-none">
@@ -158,12 +224,11 @@
   <!-- LEFT SIDEBAR PANEL -->
   <aside class="w-full md:w-80 lg:w-96 flex-shrink-0 p-4 md:p-6 flex flex-col gap-4 max-h-screen overflow-y-auto">
     
-    <!-- Top Action Row (Upload & Reset) -->
-    <div class="flex items-center justify-between gap-3">
-      <label class="soft-button cursor-pointer px-5 py-2.5 rounded-full text-slate-600 text-sm font-medium tracking-wide flex items-center justify-center gap-2 flex-1">
-        <i class="fa-solid fa-cloud-arrow-up text-indigo-400"></i>
-        <span>Upload Media / Font</span>
-        <input type="file" id="asset-upload" accept="image/*,video/mp4,video/webm,video/quicktime,audio/*,.ttf,.otf,.woff,.woff2" class="hidden">
+    <!-- TOP ACTION ROW - MATCHING ORIGINAL WIREFRAME UPLOAD BUTTON -->
+    <div class="flex items-center justify-end gap-3 pr-2">
+      <label class="upload-pill-btn cursor-pointer px-6 py-2 text-sm font-normal text-slate-600 flex items-center justify-center gap-2">
+        <span>Upload</span>
+        <input type="file" id="asset-upload" accept="image/*,video/mp4,video/webm,video/quicktime,image/gif,audio/wav,audio/*,.ttf,.otf,.woff,.woff2" class="hidden">
       </label>
       
       <button id="reset-btn" title="Reset Controls" class="soft-button p-2.5 rounded-full text-slate-500 hover:text-indigo-600">
@@ -180,19 +245,16 @@
         <input type="text" id="canvas-text-input" value="TYPOGRAPHY" class="w-full px-4 py-2 rounded-xl border border-slate-200 bg-white/80 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-300 text-slate-700 text-sm font-medium transition-all shadow-sm">
       </div>
 
-      <!-- ACCORDION 1: Typography -->
+      <!-- ACCORDION 1: Typography Controls -->
       <div class="border border-slate-200/80 rounded-2xl bg-white/50 overflow-hidden">
         <button class="accordion-header w-full px-4 py-3 flex items-center justify-between font-semibold text-xs text-slate-600 uppercase tracking-wider bg-white/40 hover:bg-white/70 transition-all">
           <span class="flex items-center gap-2"><i class="fa-solid fa-font text-indigo-400"></i> Typography</span>
           <i class="fa-solid fa-chevron-down text-slate-400 text-xs transition-transform duration-200"></i>
         </button>
-        
+
         <div class="accordion-content open px-4 py-3 border-t border-slate-200/60">
-          <div class="flex justify-between items-center mb-2">
-            <span class="text-[11px] text-slate-400 font-semibold uppercase">Google Typeface</span>
-            <span id="font-name-badge" class="text-[10px] bg-indigo-100 text-indigo-600 px-2 py-0.5 rounded-full font-mono">Space Grotesk</span>
-          </div>
-          
+          <!-- Typeface Select -->
+          <label class="text-[11px] text-slate-500 block mb-1">Google Font / Typeface</label>
           <select id="typeface-select" class="w-full px-3 py-2 rounded-xl border border-slate-200 bg-white/80 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-300 text-slate-700 text-xs font-medium cursor-pointer shadow-sm mb-3">
             <option value="Space Grotesk">Space Grotesk</option>
             <option value="Inter">Inter</option>
@@ -209,18 +271,29 @@
 
           <!-- Kerning Slider -->
           <div class="mb-3">
-            <div class="flex justify-between text-xs text-slate-500 mb-1">
-              <span>Kerning (Spacing)</span>
-              <span id="val-kerning" class="font-mono">4px</span>
+            <div class="flex justify-between items-center text-xs text-slate-500 mb-1">
+              <label class="flex items-center gap-1.5 cursor-pointer">
+                <input type="checkbox" id="toggle-kerning" checked class="w-3.5 h-3.5 accent-indigo-500 rounded">
+                <span>Kerning (Spacing)</span>
+              </label>
+              <div class="flex items-center gap-1 font-mono text-[11px]">
+                <input type="number" id="num-kerning" value="4" min="-5" max="40" class="w-12 px-1 text-right bg-white/80 border border-slate-200 rounded focus:outline-none focus:ring-1 focus:ring-indigo-300">
+                <span>px</span>
+              </div>
             </div>
             <input type="range" id="slider-kerning" min="-5" max="40" value="4" step="1">
           </div>
 
           <!-- Boldness Slider -->
           <div class="mb-3">
-            <div class="flex justify-between text-xs text-slate-500 mb-1">
-              <span>Boldness (Weight)</span>
-              <span id="val-boldness" class="font-mono">700</span>
+            <div class="flex justify-between items-center text-xs text-slate-500 mb-1">
+              <label class="flex items-center gap-1.5 cursor-pointer">
+                <input type="checkbox" id="toggle-boldness" checked class="w-3.5 h-3.5 accent-indigo-500 rounded">
+                <span>Boldness (Weight)</span>
+              </label>
+              <div class="flex items-center gap-1 font-mono text-[11px]">
+                <input type="number" id="num-boldness" value="700" min="100" max="900" step="100" class="w-14 px-1 text-right bg-white/80 border border-slate-200 rounded focus:outline-none focus:ring-1 focus:ring-indigo-300">
+              </div>
             </div>
             <input type="range" id="slider-boldness" min="100" max="900" value="700" step="100">
           </div>
@@ -250,9 +323,15 @@
 
           <!-- Stroke Width Slider -->
           <div>
-            <div class="flex justify-between text-xs text-slate-500 mb-1">
-              <span>Stroke Width</span>
-              <span id="val-stroke" class="font-mono">0px</span>
+            <div class="flex justify-between items-center text-xs text-slate-500 mb-1">
+              <label class="flex items-center gap-1.5 cursor-pointer">
+                <input type="checkbox" id="toggle-stroke" checked class="w-3.5 h-3.5 accent-indigo-500 rounded">
+                <span>Stroke Width</span>
+              </label>
+              <div class="flex items-center gap-1 font-mono text-[11px]">
+                <input type="number" id="num-stroke" value="0" min="0" max="12" step="0.5" class="w-12 px-1 text-right bg-white/80 border border-slate-200 rounded focus:outline-none focus:ring-1 focus:ring-indigo-300">
+                <span>px</span>
+              </div>
             </div>
             <input type="range" id="slider-stroke" min="0" max="12" value="0" step="0.5">
           </div>
@@ -288,16 +367,22 @@
             </div>
             <div id="glass-controls" class="space-y-2 hidden">
               <div>
-                <div class="flex justify-between text-[11px] text-slate-500 mb-1">
+                <div class="flex justify-between items-center text-[11px] text-slate-500 mb-1">
                   <span>Glass Blur</span>
-                  <span id="val-glass-blur" class="font-mono">12px</span>
+                  <div class="flex items-center gap-1 font-mono text-[11px]">
+                    <input type="number" id="num-glass-blur" value="12" min="0" max="30" class="w-12 px-1 text-right bg-white/80 border border-slate-200 rounded focus:outline-none focus:ring-1 focus:ring-indigo-300">
+                    <span>px</span>
+                  </div>
                 </div>
                 <input type="range" id="slider-glass-blur" min="0" max="30" value="12" step="1">
               </div>
               <div>
-                <div class="flex justify-between text-[11px] text-slate-500 mb-1">
+                <div class="flex justify-between items-center text-[11px] text-slate-500 mb-1">
                   <span>Glass Tint Opacity</span>
-                  <span id="val-glass-opacity" class="font-mono">25%</span>
+                  <div class="flex items-center gap-1 font-mono text-[11px]">
+                    <input type="number" id="num-glass-opacity" value="25" min="0" max="100" class="w-12 px-1 text-right bg-white/80 border border-slate-200 rounded focus:outline-none focus:ring-1 focus:ring-indigo-300">
+                    <span>%</span>
+                  </div>
                 </div>
                 <input type="range" id="slider-glass-opacity" min="0" max="100" value="25" step="5">
               </div>
@@ -306,29 +391,68 @@
 
           <!-- Blur Slider -->
           <div class="mb-3">
-            <div class="flex justify-between text-xs text-slate-500 mb-1">
-              <span>Text Blur</span>
-              <span id="val-blur" class="font-mono">0px</span>
+            <div class="flex justify-between items-center text-xs text-slate-500 mb-1">
+              <label class="flex items-center gap-1.5 cursor-pointer">
+                <input type="checkbox" id="toggle-blur" checked class="w-3.5 h-3.5 accent-indigo-500 rounded">
+                <span>Text Blur</span>
+              </label>
+              <div class="flex items-center gap-1 font-mono text-[11px]">
+                <input type="number" id="num-blur" value="0" min="0" max="25" step="0.5" class="w-12 px-1 text-right bg-white/80 border border-slate-200 rounded focus:outline-none focus:ring-1 focus:ring-indigo-300">
+                <span>px</span>
+              </div>
             </div>
             <input type="range" id="slider-blur" min="0" max="25" value="0" step="0.5">
           </div>
 
           <!-- Drop Shadow Controls -->
           <div class="mb-3 p-2.5 bg-white/60 rounded-xl border border-slate-200/80">
-            <span class="text-xs font-semibold text-slate-600 block mb-2">Drop Shadow</span>
+            <div class="flex items-center justify-between mb-2">
+              <label class="flex items-center gap-1.5 cursor-pointer text-xs font-semibold text-slate-600">
+                <input type="checkbox" id="toggle-ds" checked class="w-3.5 h-3.5 accent-indigo-500 rounded">
+                <span>Drop Shadow</span>
+              </label>
+            </div>
+            <div class="mb-2">
+              <div class="flex justify-between items-center text-[10px] text-slate-500 mb-1">
+                <span>Shadow Distance</span>
+                <div class="flex items-center gap-1 font-mono text-[10px]">
+                  <input type="number" id="num-ds-dist" value="8" min="0" max="60" class="w-10 px-1 text-right bg-white/80 border border-slate-200 rounded focus:outline-none focus:ring-1 focus:ring-indigo-300">
+                  <span>px</span>
+                </div>
+              </div>
+              <input type="range" id="slider-ds-dist" min="0" max="60" value="8" step="1">
+            </div>
             <div class="grid grid-cols-2 gap-2 mb-2">
               <div>
-                <div class="flex justify-between text-[10px] text-slate-500"><span>Offset X</span><span id="val-ds-x" class="font-mono">0px</span></div>
+                <div class="flex justify-between items-center text-[10px] text-slate-500">
+                  <span>Offset X</span>
+                  <div class="flex items-center gap-1 font-mono text-[10px]">
+                    <input type="number" id="num-ds-x" value="0" min="-30" max="30" class="w-9 px-1 text-right bg-white/80 border border-slate-200 rounded focus:outline-none focus:ring-1 focus:ring-indigo-300">
+                    <span>px</span>
+                  </div>
+                </div>
                 <input type="range" id="slider-ds-x" min="-30" max="30" value="0" step="1">
               </div>
               <div>
-                <div class="flex justify-between text-[10px] text-slate-500"><span>Offset Y</span><span id="val-ds-y" class="font-mono">8px</span></div>
+                <div class="flex justify-between items-center text-[10px] text-slate-500">
+                  <span>Offset Y</span>
+                  <div class="flex items-center gap-1 font-mono text-[10px]">
+                    <input type="number" id="num-ds-y" value="8" min="-30" max="30" class="w-9 px-1 text-right bg-white/80 border border-slate-200 rounded focus:outline-none focus:ring-1 focus:ring-indigo-300">
+                    <span>px</span>
+                  </div>
+                </div>
                 <input type="range" id="slider-ds-y" min="-30" max="30" value="8" step="1">
               </div>
             </div>
             <div class="grid grid-cols-2 gap-2 items-center">
               <div>
-                <div class="flex justify-between text-[10px] text-slate-500"><span>Blur Radius</span><span id="val-ds-blur" class="font-mono">15px</span></div>
+                <div class="flex justify-between items-center text-[10px] text-slate-500">
+                  <span>Blur Radius</span>
+                  <div class="flex items-center gap-1 font-mono text-[10px]">
+                    <input type="number" id="num-ds-blur" value="15" min="0" max="50" class="w-9 px-1 text-right bg-white/80 border border-slate-200 rounded focus:outline-none focus:ring-1 focus:ring-indigo-300">
+                    <span>px</span>
+                  </div>
+                </div>
                 <input type="range" id="slider-ds-blur" min="0" max="50" value="15" step="1">
               </div>
               <div>
@@ -343,28 +467,102 @@
             </div>
           </div>
 
-          <!-- Inner Shadow Controls -->
-          <div class="p-2.5 bg-white/60 rounded-xl border border-slate-200/80">
-            <span class="text-xs font-semibold text-slate-600 block mb-2">Inner Shadow (Box)</span>
+          <!-- Text Repeater -->
+          <div class="p-2.5 bg-white/60 rounded-xl border border-slate-200/80 mb-3">
+            <div class="flex items-center justify-between mb-2">
+              <label class="flex items-center gap-1.5 cursor-pointer text-xs font-semibold text-slate-600">
+                <input type="checkbox" id="toggle-rep" checked class="w-3.5 h-3.5 accent-indigo-500 rounded">
+                <span><i class="fa-solid fa-copy text-indigo-400 mr-1"></i> Text Repeater</span>
+              </label>
+            </div>
+            <div class="mb-2">
+              <div class="flex justify-between items-center text-[10px] text-slate-500">
+                <span>Copy Count</span>
+                <div class="flex items-center gap-1 font-mono text-[10px]">
+                  <input type="number" id="num-rep-count" value="1" min="1" max="10" class="w-9 px-1 text-right bg-white/80 border border-slate-200 rounded focus:outline-none focus:ring-1 focus:ring-indigo-300">
+                </div>
+              </div>
+              <input type="range" id="slider-rep-count" min="1" max="10" value="1" step="1">
+            </div>
             <div class="grid grid-cols-2 gap-2 mb-2">
               <div>
-                <div class="flex justify-between text-[10px] text-slate-500"><span>Inner X</span><span id="val-is-x" class="font-mono">0px</span></div>
+                <div class="flex justify-between items-center text-[10px] text-slate-500">
+                  <span>Offset X</span>
+                  <div class="flex items-center gap-1 font-mono text-[10px]">
+                    <input type="number" id="num-rep-x" value="6" min="-40" max="40" class="w-9 px-1 text-right bg-white/80 border border-slate-200 rounded focus:outline-none focus:ring-1 focus:ring-indigo-300">
+                    <span>px</span>
+                  </div>
+                </div>
+                <input type="range" id="slider-rep-x" min="-40" max="40" value="6" step="1">
+              </div>
+              <div>
+                <div class="flex justify-between items-center text-[10px] text-slate-500">
+                  <span>Offset Y</span>
+                  <div class="flex items-center gap-1 font-mono text-[10px]">
+                    <input type="number" id="num-rep-y" value="6" min="-40" max="40" class="w-9 px-1 text-right bg-white/80 border border-slate-200 rounded focus:outline-none focus:ring-1 focus:ring-indigo-300">
+                    <span>px</span>
+                  </div>
+                </div>
+                <input type="range" id="slider-rep-y" min="-40" max="40" value="6" step="1">
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between items-center text-[10px] text-slate-500">
+                <span>Opacity Decay</span>
+                <div class="flex items-center gap-1 font-mono text-[10px]">
+                  <input type="number" id="num-rep-decay" value="15" min="0" max="50" class="w-9 px-1 text-right bg-white/80 border border-slate-200 rounded focus:outline-none focus:ring-1 focus:ring-indigo-300">
+                  <span>%</span>
+                </div>
+              </div>
+              <input type="range" id="slider-rep-decay" min="0" max="50" value="15" step="5">
+            </div>
+          </div>
+
+          <!-- Inner Shadow Controls -->
+          <div class="p-2.5 bg-white/60 rounded-xl border border-slate-200/80">
+            <div class="flex items-center justify-between mb-2">
+              <label class="flex items-center gap-1.5 cursor-pointer text-xs font-semibold text-slate-600">
+                <input type="checkbox" id="toggle-is" checked class="w-3.5 h-3.5 accent-indigo-500 rounded">
+                <span>Inner Shadow (Box)</span>
+              </label>
+            </div>
+            <div class="grid grid-cols-2 gap-2 mb-2">
+              <div>
+                <div class="flex justify-between items-center text-[10px] text-slate-500">
+                  <span>Inner X</span>
+                  <div class="flex items-center gap-1 font-mono text-[10px]">
+                    <input type="number" id="num-is-x" value="0" min="-30" max="30" class="w-9 px-1 text-right bg-white/80 border border-slate-200 rounded focus:outline-none focus:ring-1 focus:ring-indigo-300">
+                    <span>px</span>
+                  </div>
+                </div>
                 <input type="range" id="slider-is-x" min="-30" max="30" value="0" step="1">
               </div>
               <div>
-                <div class="flex justify-between text-[10px] text-slate-500"><span>Inner Y</span><span id="val-is-y" class="font-mono">4px</span></div>
+                <div class="flex justify-between items-center text-[10px] text-slate-500">
+                  <span>Inner Y</span>
+                  <div class="flex items-center gap-1 font-mono text-[10px]">
+                    <input type="number" id="num-is-y" value="0" min="-30" max="30" class="w-9 px-1 text-right bg-white/80 border border-slate-200 rounded focus:outline-none focus:ring-1 focus:ring-indigo-300">
+                    <span>px</span>
+                  </div>
+                </div>
                 <input type="range" id="slider-is-y" min="-30" max="30" value="0" step="1">
               </div>
             </div>
             <div class="grid grid-cols-2 gap-2 items-center">
               <div>
-                <div class="flex justify-between text-[10px] text-slate-500"><span>Inner Blur</span><span id="val-is-blur" class="font-mono">10px</span></div>
+                <div class="flex justify-between items-center text-[10px] text-slate-500">
+                  <span>Inner Blur</span>
+                  <div class="flex items-center gap-1 font-mono text-[10px]">
+                    <input type="number" id="num-is-blur" value="0" min="0" max="40" class="w-9 px-1 text-right bg-white/80 border border-slate-200 rounded focus:outline-none focus:ring-1 focus:ring-indigo-300">
+                    <span>px</span>
+                  </div>
+                </div>
                 <input type="range" id="slider-is-blur" min="0" max="40" value="0" step="1">
               </div>
               <div>
                 <label class="text-[10px] text-slate-500 block">Shadow Color</label>
                 <div class="flex items-center gap-1.5 bg-white p-1 rounded-lg border border-slate-200">
-                  <div class="color-picker-wrapper w-4 h-4 rounded border border-slate-300" id="is-color-preview" style="background-color: #000000;">
+                  <div class="color-picker-wrapper w-4 h-4 rounded border border-slate-300" id="is-color-preview" style="background-color: rgba(0,0,0,0.2);">
                     <input type="color" id="picker-is" value="#000000">
                   </div>
                   <input type="text" id="hex-is" value="#000000" class="w-full text-[10px] font-mono bg-transparent uppercase focus:outline-none">
@@ -376,56 +574,98 @@
         </div>
       </div>
 
-      <!-- ACCORDION 3: Modifications & Motion (Warp, Compress, Wave, Fuzz, Distortion) -->
+      <!-- ACCORDION 3: Modifications & Motion (Warp, Compress, Wave, Animations) -->
       <div class="border border-slate-200/80 rounded-2xl bg-white/50 overflow-hidden">
         <button class="accordion-header w-full px-4 py-3 flex items-center justify-between font-semibold text-xs text-slate-600 uppercase tracking-wider bg-white/40 hover:bg-white/70 transition-all">
-          <span class="flex items-center gap-2"><i class="fa-solid fa-sliders text-indigo-400"></i> Modify & Motion</span>
+          <span class="flex items-center gap-2"><i class="fa-solid fa-film text-indigo-400"></i> Motion & Animations</span>
           <i class="fa-solid fa-chevron-down text-slate-400 text-xs transition-transform duration-200"></i>
         </button>
 
         <div class="accordion-content px-4 py-3 border-t border-slate-200/60">
           
+          <!-- Keyframe Animation Mode -->
+          <div class="mb-3">
+            <span class="text-[11px] text-slate-500 block mb-1.5">Kinetic Animation Preset</span>
+            <select id="anim-preset-select" class="w-full px-3 py-2 rounded-xl border border-slate-200 bg-white/80 text-xs text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-300">
+              <option value="none">None (Static)</option>
+              <option value="typewriter">1. Typewriter Reveal</option>
+              <option value="blink">2. Blink / Flash</option>
+              <option value="trimpath">3. Trim Path (Outline Draw)</option>
+              <option value="bounce">4. Bounce Jump</option>
+              <option value="shake">5. Glitch Shake</option>
+              <option value="wave">6. Floating Wave</option>
+              <option value="rubber">7. Rubber Band Stretch</option>
+              <option value="swing">8. Pendulum Swing</option>
+            </select>
+          </div>
+
           <!-- Expanding <> Compressing Slider -->
           <div class="mb-3">
-            <div class="flex justify-between text-xs text-slate-500 mb-1">
-              <span>Expanding <> Compressing</span>
-              <span id="val-stretch" class="font-mono">100%</span>
+            <div class="flex justify-between items-center text-xs text-slate-500 mb-1">
+              <label class="flex items-center gap-1.5 cursor-pointer">
+                <input type="checkbox" id="toggle-stretch" checked class="w-3.5 h-3.5 accent-indigo-500 rounded">
+                <span>Expanding <> Compressing</span>
+              </label>
+              <div class="flex items-center gap-1 font-mono text-[11px]">
+                <input type="number" id="num-stretch" value="100" min="50" max="200" step="5" class="w-12 px-1 text-right bg-white/80 border border-slate-200 rounded focus:outline-none focus:ring-1 focus:ring-indigo-300">
+                <span>%</span>
+              </div>
             </div>
             <input type="range" id="slider-stretch" min="50" max="200" value="100" step="5">
           </div>
 
           <!-- Warp Bend Slider -->
           <div class="mb-3">
-            <div class="flex justify-between text-xs text-slate-500 mb-1">
-              <span>Warp Bend Effect</span>
-              <span id="val-warp" class="font-mono">0</span>
+            <div class="flex justify-between items-center text-xs text-slate-500 mb-1">
+              <label class="flex items-center gap-1.5 cursor-pointer">
+                <input type="checkbox" id="toggle-warp" checked class="w-3.5 h-3.5 accent-indigo-500 rounded">
+                <span>Warp Bend Effect</span>
+              </label>
+              <div class="flex items-center gap-1 font-mono text-[11px]">
+                <input type="number" id="num-warp" value="0" min="-50" max="50" class="w-10 px-1 text-right bg-white/80 border border-slate-200 rounded focus:outline-none focus:ring-1 focus:ring-indigo-300">
+              </div>
             </div>
             <input type="range" id="slider-warp" min="-50" max="50" value="0" step="1">
           </div>
 
           <!-- Fuzziness Slider -->
           <div class="mb-3">
-            <div class="flex justify-between text-xs text-slate-500 mb-1">
-              <span>Fuzziness</span>
-              <span id="val-fuzz" class="font-mono">0</span>
+            <div class="flex justify-between items-center text-xs text-slate-500 mb-1">
+              <label class="flex items-center gap-1.5 cursor-pointer">
+                <input type="checkbox" id="toggle-fuzz" checked class="w-3.5 h-3.5 accent-indigo-500 rounded">
+                <span>Fuzziness</span>
+              </label>
+              <div class="flex items-center gap-1 font-mono text-[11px]">
+                <input type="number" id="num-fuzz" value="0" min="0" max="40" class="w-10 px-1 text-right bg-white/80 border border-slate-200 rounded focus:outline-none focus:ring-1 focus:ring-indigo-300">
+              </div>
             </div>
             <input type="range" id="slider-fuzz" min="0" max="40" value="0" step="1">
           </div>
 
           <!-- Distortion Slider -->
           <div class="mb-3">
-            <div class="flex justify-between text-xs text-slate-500 mb-1">
-              <span>Distortion</span>
-              <span id="val-distortion" class="font-mono">0</span>
+            <div class="flex justify-between items-center text-xs text-slate-500 mb-1">
+              <label class="flex items-center gap-1.5 cursor-pointer">
+                <input type="checkbox" id="toggle-distortion" checked class="w-3.5 h-3.5 accent-indigo-500 rounded">
+                <span>Distortion</span>
+              </label>
+              <div class="flex items-center gap-1 font-mono text-[11px]">
+                <input type="number" id="num-distortion" value="0" min="0" max="60" class="w-10 px-1 text-right bg-white/80 border border-slate-200 rounded focus:outline-none focus:ring-1 focus:ring-indigo-300">
+              </div>
             </div>
             <input type="range" id="slider-distortion" min="0" max="60" value="0" step="1">
           </div>
 
           <!-- Wave Slider -->
           <div>
-            <div class="flex justify-between text-xs text-slate-500 mb-1">
-              <span>Wave Motion</span>
-              <span id="val-wave" class="font-mono">0</span>
+            <div class="flex justify-between items-center text-xs text-slate-500 mb-1">
+              <label class="flex items-center gap-1.5 cursor-pointer">
+                <input type="checkbox" id="toggle-wave" checked class="w-3.5 h-3.5 accent-indigo-500 rounded">
+                <span>Wave Motion</span>
+              </label>
+              <div class="flex items-center gap-1 font-mono text-[11px]">
+                <input type="number" id="num-wave" value="0" min="0" max="50" class="w-10 px-1 text-right bg-white/80 border border-slate-200 rounded focus:outline-none focus:ring-1 focus:ring-indigo-300">
+              </div>
             </div>
             <input type="range" id="slider-wave" min="0" max="50" value="0" step="1">
           </div>
@@ -442,6 +682,16 @@
 
         <div class="accordion-content px-4 py-3 border-t border-slate-200/60">
           
+          <!-- Background Example Patterns -->
+          <div class="mb-3">
+            <span class="text-[11px] text-slate-500 block mb-1.5">Preset Background Patterns</span>
+            <div class="grid grid-cols-3 gap-2">
+              <button class="pattern-btn text-[10px] font-medium py-2 rounded-xl border border-slate-200 bg-gradient-to-tr from-indigo-200 via-purple-200 to-pink-200 hover:shadow-md transition-all" data-pattern="gradient">Gradient</button>
+              <button class="pattern-btn text-[10px] font-medium py-2 rounded-xl border border-slate-200 bg-slate-800 text-white hover:shadow-md transition-all" data-pattern="mirror">Mirror Grid</button>
+              <button class="pattern-btn text-[10px] font-medium py-2 rounded-xl border border-slate-200 bg-gradient-to-r from-emerald-200 via-teal-200 to-blue-200 hover:shadow-md transition-all" data-pattern="abstract">Abstract</button>
+            </div>
+          </div>
+
           <!-- Background Color Presets -->
           <div class="mb-3">
             <span class="text-[11px] text-slate-500 block mb-1.5">Canvas Tint Color</span>
@@ -450,6 +700,21 @@
               <input type="text" id="hex-bg" value="#FFFFFF" class="w-24 text-xs font-mono bg-white px-2 py-1 rounded-lg border border-slate-200 uppercase">
               <button id="btn-clear-bg" class="text-xs text-slate-500 hover:text-indigo-600 underline ml-auto">Clear Media</button>
             </div>
+          </div>
+
+          <!-- Background Opacity Slider & Checkbox Toggle -->
+          <div class="mb-3">
+            <div class="flex justify-between items-center text-xs text-slate-500 mb-1">
+              <label class="flex items-center gap-1.5 cursor-pointer">
+                <input type="checkbox" id="toggle-bg-opacity" checked class="w-3.5 h-3.5 accent-indigo-500 rounded">
+                <span>Background Opacity</span>
+              </label>
+              <div class="flex items-center gap-1 font-mono text-[11px]">
+                <input type="number" id="num-bg-opacity" value="100" min="0" max="100" step="1" class="w-12 px-1 text-right bg-white/80 border border-slate-200 rounded focus:outline-none focus:ring-1 focus:ring-indigo-300">
+                <span>%</span>
+              </div>
+            </div>
+            <input type="range" id="slider-bg-opacity" min="0" max="100" value="100" step="1">
           </div>
 
           <!-- Video Playback UI (Enabled when video background loaded) -->
@@ -486,14 +751,6 @@
   <!-- MAIN CANVAS VIEWPORT AREA -->
   <main class="flex-1 p-4 md:p-6 md:pl-0 flex flex-col min-h-[500px]">
     <div id="canvas-container" class="w-full h-full min-h-[550px] bg-white/40 rounded-3xl border border-white/60 shadow-inner relative flex flex-col items-center justify-center overflow-hidden transition-all duration-300">
-      
-      <!-- Interactive Floating Preset Bar -->
-      <div class="absolute top-6 right-6 flex items-center gap-2 bg-white/75 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/80 shadow-sm z-20">
-        <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider mr-1">Presets:</span>
-        <button class="preset-btn px-2.5 py-1 text-xs rounded-full bg-slate-200/70 hover:bg-indigo-500 hover:text-white transition-all" data-preset="clean">Minimal</button>
-        <button class="preset-btn px-2.5 py-1 text-xs rounded-full bg-slate-200/70 hover:bg-indigo-500 hover:text-white transition-all" data-preset="glass">Glass</button>
-        <button class="preset-btn px-2.5 py-1 text-xs rounded-full bg-slate-200/70 hover:bg-indigo-500 hover:text-white transition-all" data-preset="glitch">Glitch</button>
-      </div>
 
       <!-- Canvas Background Overlay Layer (Image & Video) -->
       <div id="custom-canvas-bg" class="absolute inset-0 bg-cover bg-center transition-opacity duration-300 pointer-events-none z-0"></div>
@@ -522,7 +779,7 @@
   <link id="dynamic-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@100..900&display=swap">
 
   <script>
-    // State Management for Toolkit
+    // Global Application State
     const state = {
       text: 'TYPOGRAPHY',
       typeface: 'Space Grotesk',
@@ -535,23 +792,46 @@
       strokeColor: '#818cf8',
       strokeWidth: 0,
       
-      // Glass Backing
-      hasGlass: false,
+      // Feature Enables
+      enableKerning: true,
+      enableBoldness: true,
+      enableStroke: true,
+      enableBlur: true,
+      enableDs: true,
+      enableRep: true,
+      enableIs: true,
+      enableStretch: true,
+      enableWarp: true,
+      enableFuzz: true,
+      enableDistortion: true,
+      enableWave: true,
+      enableBgOpacity: true,
+      
+      // Glass Effect
+      useGlass: false,
       glassBlur: 12,
       glassOpacity: 25,
       
       // Shadows
+      dsDistance: 8,
       dsX: 0,
       dsY: 8,
       dsBlur: 15,
       dsColor: '#000000',
       
       isX: 0,
-      isY: 4,
-      isBlur: 10,
+      isY: 0,
+      isBlur: 0,
       isColor: '#000000',
       
-      // Modifications & Motion
+      // Repeater
+      repCount: 1,
+      repX: 6,
+      repY: 6,
+      repDecay: 15,
+      
+      // Animations & Motion
+      animPreset: 'none',
       stretch: 100,
       warp: 0,
       fuzziness: 0,
@@ -560,6 +840,7 @@
       
       // Background & Media
       canvasBgColor: '#FFFFFF',
+      bgOpacity: 100,
       isVideoLoaded: false,
       isVideoLooping: true,
 
@@ -567,78 +848,105 @@
       posY: 0
     };
 
-    // DOM Elements Mapping
+    // Helper function to bind checkboxes for turning effects on/off
+    function bindToggle(toggleId, stateKey) {
+      const el = document.getElementById(toggleId);
+      if (!el) return;
+      el.addEventListener('change', (e) => {
+        state[stateKey] = e.target.checked;
+        renderCanvas();
+      });
+    }
+
+    // Bind all parameter toggle checkboxes
+    bindToggle('toggle-kerning', 'enableKerning');
+    bindToggle('toggle-boldness', 'enableBoldness');
+    bindToggle('toggle-stroke', 'enableStroke');
+    bindToggle('toggle-blur', 'enableBlur');
+    bindToggle('toggle-ds', 'enableDs');
+    bindToggle('toggle-rep', 'enableRep');
+    bindToggle('toggle-is', 'enableIs');
+    bindToggle('toggle-stretch', 'enableStretch');
+    bindToggle('toggle-warp', 'enableWarp');
+    bindToggle('toggle-fuzz', 'enableFuzz');
+    bindToggle('toggle-distortion', 'enableDistortion');
+    bindToggle('toggle-wave', 'enableWave');
+    bindToggle('toggle-bg-opacity', 'enableBgOpacity');
+
+    // DOM Reference Registry Object
     const dom = {
       textInput: document.getElementById('canvas-text-input'),
       typefaceSelect: document.getElementById('typeface-select'),
-      fontNameBadge: document.getElementById('font-name-badge'),
-      fontLink: document.getElementById('dynamic-google-font'),
-      
       sliderKerning: document.getElementById('slider-kerning'),
-      valKerning: document.getElementById('val-kerning'),
-      
+      numKerning: document.getElementById('num-kerning'),
       sliderBoldness: document.getElementById('slider-boldness'),
-      valBoldness: document.getElementById('val-boldness'),
+      numBoldness: document.getElementById('num-boldness'),
+      pickerFill: document.getElementById('picker-fill'),
+      hexFill: document.getElementById('hex-fill'),
+      fillColorPreview: document.getElementById('fill-color-preview'),
+      pickerStroke: document.getElementById('picker-stroke'),
+      hexStroke: document.getElementById('hex-stroke'),
+      strokeColorPreview: document.getElementById('stroke-color-preview'),
+      sliderStroke: document.getElementById('slider-stroke'),
+      numStroke: document.getElementById('num-stroke'),
       
       btnItalic: document.getElementById('btn-italic'),
       btnMirror: document.getElementById('btn-mirror'),
-      
       toggleGlass: document.getElementById('toggle-glass'),
       glassControls: document.getElementById('glass-controls'),
       sliderGlassBlur: document.getElementById('slider-glass-blur'),
-      valGlassBlur: document.getElementById('val-glass-blur'),
+      numGlassBlur: document.getElementById('num-glass-blur'),
       sliderGlassOpacity: document.getElementById('slider-glass-opacity'),
-      valGlassOpacity: document.getElementById('val-glass-opacity'),
+      numGlassOpacity: document.getElementById('num-glass-opacity'),
       
       sliderBlur: document.getElementById('slider-blur'),
-      valBlur: document.getElementById('val-blur'),
+      numBlur: document.getElementById('num-blur'),
       
-      // Drop Shadow
+      sliderDsDist: document.getElementById('slider-ds-dist'),
+      numDsDist: document.getElementById('num-ds-dist'),
       sliderDsX: document.getElementById('slider-ds-x'),
-      valDsX: document.getElementById('val-ds-x'),
+      numDsX: document.getElementById('num-ds-x'),
       sliderDsY: document.getElementById('slider-ds-y'),
-      valDsY: document.getElementById('val-ds-y'),
+      numDsY: document.getElementById('num-ds-y'),
       sliderDsBlur: document.getElementById('slider-ds-blur'),
-      valDsBlur: document.getElementById('val-ds-blur'),
+      numDsBlur: document.getElementById('num-ds-blur'),
       pickerDs: document.getElementById('picker-ds'),
       hexDs: document.getElementById('hex-ds'),
-      previewDs: document.getElementById('ds-color-preview'),
+      dsColorPreview: document.getElementById('ds-color-preview'),
       
-      // Inner Shadow
+      sliderRepCount: document.getElementById('slider-rep-count'),
+      numRepCount: document.getElementById('num-rep-count'),
+      sliderRepX: document.getElementById('slider-rep-x'),
+      numRepX: document.getElementById('num-rep-x'),
+      sliderRepY: document.getElementById('slider-rep-y'),
+      numRepY: document.getElementById('num-rep-y'),
+      sliderRepDecay: document.getElementById('slider-rep-decay'),
+      numRepDecay: document.getElementById('num-rep-decay'),
+      
       sliderIsX: document.getElementById('slider-is-x'),
-      valIsX: document.getElementById('val-is-x'),
+      numIsX: document.getElementById('num-is-x'),
       sliderIsY: document.getElementById('slider-is-y'),
-      valIsY: document.getElementById('val-is-y'),
+      numIsY: document.getElementById('num-is-y'),
       sliderIsBlur: document.getElementById('slider-is-blur'),
-      valIsBlur: document.getElementById('val-is-blur'),
+      numIsBlur: document.getElementById('num-is-blur'),
       pickerIs: document.getElementById('picker-is'),
       hexIs: document.getElementById('hex-is'),
-      previewIs: document.getElementById('is-color-preview'),
-      innerShadowOverlay: document.getElementById('inner-shadow-overlay'),
+      isColorPreview: document.getElementById('is-color-preview'),
       
-      pickerFill: document.getElementById('picker-fill'),
-      hexFill: document.getElementById('hex-fill'),
-      previewFill: document.getElementById('fill-color-preview'),
-      
-      pickerStroke: document.getElementById('picker-stroke'),
-      hexStroke: document.getElementById('hex-stroke'),
-      previewStroke: document.getElementById('stroke-color-preview'),
-      sliderStroke: document.getElementById('slider-stroke'),
-      valStroke: document.getElementById('val-stroke'),
-      
-      // Modifications & Motion
+      animPresetSelect: document.getElementById('anim-preset-select'),
       sliderStretch: document.getElementById('slider-stretch'),
-      valStretch: document.getElementById('val-stretch'),
+      numStretch: document.getElementById('num-stretch'),
       sliderWarp: document.getElementById('slider-warp'),
-      valWarp: document.getElementById('val-warp'),
+      numWarp: document.getElementById('num-warp'),
       sliderFuzz: document.getElementById('slider-fuzz'),
-      valFuzz: document.getElementById('val-fuzz'),
+      numFuzz: document.getElementById('num-fuzz'),
       sliderDistortion: document.getElementById('slider-distortion'),
-      valDistortion: document.getElementById('val-distortion'),
+      numDistortion: document.getElementById('num-distortion'),
       sliderWave: document.getElementById('slider-wave'),
-      valWave: document.getElementById('val-wave'),
+      numWave: document.getElementById('num-wave'),
       
-      // Background & Media
+      sliderBgOpacity: document.getElementById('slider-bg-opacity'),
+      numBgOpacity: document.getElementById('num-bg-opacity'),
       pickerBg: document.getElementById('picker-bg'),
       hexBg: document.getElementById('hex-bg'),
       btnClearBg: document.getElementById('btn-clear-bg'),
@@ -648,399 +956,447 @@
       videoTimeDisplay: document.getElementById('video-time-display'),
       videoVolume: document.getElementById('video-volume'),
       btnVideoLoop: document.getElementById('btn-video-loop'),
-      
-      textTarget: document.getElementById('canvas-text-target'),
-      textWrapper: document.getElementById('text-wrapper'),
-      canvasContainer: document.getElementById('canvas-container'),
-      canvasBg: document.getElementById('custom-canvas-bg'),
-      videoBg: document.getElementById('canvas-video-bg'),
       assetUpload: document.getElementById('asset-upload'),
       resetBtn: document.getElementById('reset-btn'),
       
-      // SVG Filters
-      feTurbulence: document.getElementById('fe-turbulence'),
-      feDisplacement: document.getElementById('fe-displacement'),
-      feFuzzDisplacement: document.getElementById('fe-fuzz-displacement'),
-      feWarpDisplacement: document.getElementById('fe-warp-displacement')
+      canvasContainer: document.getElementById('canvas-container'),
+      canvasBg: document.getElementById('custom-canvas-bg'),
+      canvasVideoBg: document.getElementById('canvas-video-bg'),
+      innerShadowOverlay: document.getElementById('inner-shadow-overlay'),
+      textWrapper: document.getElementById('text-wrapper'),
+      textTarget: document.getElementById('canvas-text-target'),
+      fontLink: document.getElementById('dynamic-google-font')
     };
 
-    function updateGoogleFontLink(fontName) {
-      const formattedName = fontName.replace(/\s+/g, '+');
-      dom.fontLink.href = `https://fonts.googleapis.com/css2?family=${formattedName}:ital,wght@0,100..900;1,100..900&display=swap`;
+    // Sync Helper Function for Range Sliders & Editable Number Inputs
+    function syncControl(sliderEl, numEl, key, parser = parseFloat) {
+      if (!sliderEl || !numEl) return;
+      
+      sliderEl.addEventListener('input', (e) => {
+        const val = parser(e.target.value);
+        numEl.value = val;
+        state[key] = val;
+        renderCanvas();
+      });
+
+      numEl.addEventListener('input', (e) => {
+        let val = parser(e.target.value);
+        if (isNaN(val)) return;
+        const min = parser(sliderEl.min);
+        const max = parser(sliderEl.max);
+        val = Math.max(min, Math.min(max, val));
+        sliderEl.value = val;
+        state[key] = val;
+        renderCanvas();
+      });
     }
 
-    // Main Render Update
-    function render() {
-      // 1. Text Content
-      dom.textTarget.textContent = state.text || ' ';
+    // Bind All Sliders & Number Pairs
+    syncControl(dom.sliderKerning, dom.numKerning, 'kerning');
+    syncControl(dom.sliderBoldness, dom.numBoldness, 'boldness');
+    syncControl(dom.sliderStroke, dom.numStroke, 'strokeWidth');
+    syncControl(dom.sliderGlassBlur, dom.numGlassBlur, 'glassBlur');
+    syncControl(dom.sliderGlassOpacity, dom.numGlassOpacity, 'glassOpacity');
+    syncControl(dom.sliderBlur, dom.numBlur, 'blur');
+    syncControl(dom.sliderDsDist, dom.numDsDist, 'dsDistance');
+    syncControl(dom.sliderDsX, dom.numDsX, 'dsX');
+    syncControl(dom.sliderDsY, dom.numDsY, 'dsY');
+    syncControl(dom.sliderDsBlur, dom.numDsBlur, 'dsBlur');
+    syncControl(dom.sliderRepCount, dom.numRepCount, 'repCount', parseInt);
+    syncControl(dom.sliderRepX, dom.numRepX, 'repX');
+    syncControl(dom.sliderRepY, dom.numRepY, 'repY');
+    syncControl(dom.sliderRepDecay, dom.numRepDecay, 'repDecay');
+    syncControl(dom.sliderIsX, dom.numIsX, 'isX');
+    syncControl(dom.sliderIsY, dom.numIsY, 'isY');
+    syncControl(dom.sliderIsBlur, dom.numIsBlur, 'isBlur');
+    syncControl(dom.sliderStretch, dom.numStretch, 'stretch');
+    syncControl(dom.sliderWarp, dom.numWarp, 'warp');
+    syncControl(dom.sliderFuzz, dom.numFuzz, 'fuzziness');
+    syncControl(dom.sliderDistortion, dom.numDistortion, 'distortion');
+    syncControl(dom.sliderWave, dom.numWave, 'wave');
+    syncControl(dom.sliderBgOpacity, dom.numBgOpacity, 'bgOpacity');
 
-      // 2. Typeface & Weight
-      dom.textTarget.style.fontFamily = `'${state.typeface}', sans-serif`;
-      dom.fontNameBadge.textContent = state.typeface;
-      dom.textTarget.style.fontWeight = state.boldness;
-      dom.valBoldness.textContent = state.boldness;
+    // Kinetic Animation Select
+    dom.animPresetSelect?.addEventListener('change', (e) => {
+      state.animPreset = e.target.value;
+      renderCanvas();
+    });
 
-      // 3. Kerning / Letter Spacing
-      dom.textTarget.style.letterSpacing = `${state.kerning}px`;
-      dom.valKerning.textContent = `${state.kerning}px`;
+    // Accordion Header Toggle Listeners
+    document.querySelectorAll('.accordion-header').forEach(header => {
+      header.addEventListener('click', () => {
+        const content = header.nextElementSibling;
+        const icon = header.querySelector('.fa-chevron-down');
+        content.classList.toggle('open');
+        if (icon) {
+          icon.style.transform = content.classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)';
+        }
+      });
+    });
 
-      // 4. Italic & Transforms (Stretch / Mirror)
+    // Font Loader
+    dom.typefaceSelect?.addEventListener('change', (e) => {
+      state.typeface = e.target.value;
+      const fontName = state.typeface.replace(/\s+/g, '+');
+      dom.fontLink.href = `https://fonts.googleapis.com/css2?family=${fontName}:wght@100..900&display=swap`;
+      renderCanvas();
+    });
+
+    // Text Input Listener
+    dom.textInput?.addEventListener('input', (e) => {
+      state.text = e.target.value || ' ';
+      renderCanvas();
+    });
+
+    // Color Inputs
+    function bindColorPicker(picker, hexInput, preview, stateKey) {
+      if (!picker || !hexInput) return;
+      picker.addEventListener('input', (e) => {
+        const color = e.target.value;
+        hexInput.value = color.toUpperCase();
+        if (preview) preview.style.backgroundColor = color;
+        state[stateKey] = color;
+        renderCanvas();
+      });
+      hexInput.addEventListener('input', (e) => {
+        const color = e.target.value;
+        if (/^#[0-9A-F]{6}$/i.test(color)) {
+          picker.value = color;
+          if (preview) preview.style.backgroundColor = color;
+          state[stateKey] = color;
+          renderCanvas();
+        }
+      });
+    }
+
+    bindColorPicker(dom.pickerFill, dom.hexFill, dom.fillColorPreview, 'fillColor');
+    bindColorPicker(dom.pickerStroke, dom.hexStroke, dom.strokeColorPreview, 'strokeColor');
+    bindColorPicker(dom.pickerDs, dom.hexDs, dom.dsColorPreview, 'dsColor');
+    bindColorPicker(dom.pickerIs, dom.hexIs, dom.isColorPreview, 'isColor');
+
+    // Canvas Background Tint Color
+    dom.pickerBg?.addEventListener('input', (e) => {
+      state.canvasBgColor = e.target.value;
+      dom.hexBg.value = e.target.value.toUpperCase();
+      dom.canvasContainer.style.backgroundColor = state.canvasBgColor;
+    });
+
+    // Italic & Mirror Buttons
+    dom.btnItalic?.addEventListener('click', () => {
+      state.isItalic = !state.isItalic;
+      dom.btnItalic.classList.toggle('bg-indigo-100', state.isItalic);
+      dom.btnItalic.classList.toggle('text-indigo-600', state.isItalic);
+      renderCanvas();
+    });
+
+    dom.btnMirror?.addEventListener('click', () => {
+      state.isMirrored = !state.isMirrored;
+      dom.btnMirror.classList.toggle('bg-indigo-100', state.isMirrored);
+      dom.btnMirror.classList.toggle('text-indigo-600', state.isMirrored);
+      renderCanvas();
+    });
+
+    // Glass Toggle
+    dom.toggleGlass?.addEventListener('change', (e) => {
+      state.useGlass = e.target.checked;
+      dom.glassControls.classList.toggle('hidden', !state.useGlass);
+      renderCanvas();
+    });
+
+    // Preset Pattern Buttons
+    document.querySelectorAll('.pattern-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const pattern = btn.dataset.pattern;
+        dom.canvasVideoBg.classList.add('hidden');
+        dom.canvasBg.style.backgroundImage = 'none';
+
+        if (pattern === 'gradient') {
+          dom.canvasBg.style.background = 'linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%)';
+        } else if (pattern === 'mirror') {
+          dom.canvasBg.style.background = 'radial-gradient(circle, #334155 10%, transparent 11%) 0 0/20px 20px, #0f172a';
+        } else if (pattern === 'abstract') {
+          dom.canvasBg.style.background = 'radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), radial-gradient(at 50% 0%, hsla(225,39%,30%,1) 0, transparent 50%), radial-gradient(at 100% 0%, hsla(339,49%,30%,1) 0, transparent 50%)';
+        }
+      });
+    });
+
+    // Preset Buttons
+    document.querySelectorAll('.preset-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const preset = btn.dataset.preset;
+        if (preset === 'clean') {
+          state.kerning = 2;
+          state.boldness = 700;
+          state.fillColor = '#334155';
+          state.strokeWidth = 0;
+          state.useGlass = false;
+          state.blur = 0;
+          state.repCount = 1;
+        } else if (preset === 'glass') {
+          state.useGlass = true;
+          state.glassBlur = 16;
+          state.glassOpacity = 30;
+          state.fillColor = '#1e293b';
+          state.dsBlur = 20;
+        } else if (preset === 'glitch') {
+          state.fuzziness = 15;
+          state.distortion = 20;
+          state.strokeWidth = 2;
+          state.strokeColor = '#f43f5e';
+          state.fillColor = '#06b6d4';
+        }
+        
+        // Refresh UI Values
+        dom.sliderKerning.value = state.kerning;
+        dom.numKerning.value = state.kerning;
+        dom.sliderBoldness.value = state.boldness;
+        dom.numBoldness.value = state.boldness;
+        dom.sliderStroke.value = state.strokeWidth;
+        dom.numStroke.value = state.strokeWidth;
+        dom.toggleGlass.checked = state.useGlass;
+        dom.glassControls.classList.toggle('hidden', !state.useGlass);
+        dom.hexFill.value = state.fillColor;
+        dom.pickerFill.value = state.fillColor;
+        
+        renderCanvas();
+      });
+    });
+
+    // Media Upload Handling
+    dom.assetUpload?.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const fileUrl = URL.createObjectURL(file);
+      const fileType = file.type;
+
+      if (fileType.startsWith('video/')) {
+        dom.canvasVideoBg.src = fileUrl;
+        dom.canvasVideoBg.classList.remove('hidden');
+        dom.canvasBg.style.backgroundImage = 'none';
+        state.isVideoLoaded = true;
+        dom.videoControlsPanel.classList.remove('opacity-50', 'pointer-events-none');
+        dom.canvasVideoBg.play();
+      } else if (fileType.startsWith('image/')) {
+        dom.canvasVideoBg.classList.add('hidden');
+        dom.canvasVideoBg.pause();
+        dom.canvasBg.style.backgroundImage = `url(${fileUrl})`;
+        dom.canvasBg.style.backgroundSize = 'cover';
+      } else if (file.name.endsWith('.ttf') || file.name.endsWith('.otf') || file.name.endsWith('.woff')) {
+        const customFont = new FontFace('UploadedFont', `url(${fileUrl})`);
+        customFont.load().then((loadedFont) => {
+          document.fonts.add(loadedFont);
+          state.typeface = 'UploadedFont';
+          renderCanvas();
+        });
+      }
+    });
+
+    // Clear Background Media
+    dom.btnClearBg?.addEventListener('click', () => {
+      dom.canvasBg.style.backgroundImage = 'none';
+      dom.canvasBg.style.background = 'none';
+      dom.canvasVideoBg.pause();
+      dom.canvasVideoBg.classList.add('hidden');
+      dom.videoControlsPanel.classList.add('opacity-50', 'pointer-events-none');
+      dom.canvasContainer.style.backgroundColor = state.canvasBgColor;
+    });
+
+    // Reset Button
+    dom.resetBtn?.addEventListener('click', () => {
+      state.kerning = 4;
+      state.boldness = 700;
+      state.isItalic = false;
+      state.isMirrored = false;
+      state.blur = 0;
+      state.strokeWidth = 0;
+      state.useGlass = false;
+      state.dsDistance = 8;
+      state.dsX = 0;
+      state.dsY = 8;
+      state.dsBlur = 15;
+      state.isX = 0;
+      state.isY = 0;
+      state.isBlur = 0;
+      state.repCount = 1;
+      state.stretch = 100;
+      state.warp = 0;
+      state.fuzziness = 0;
+      state.distortion = 0;
+      state.wave = 0;
+      state.posX = 0;
+      state.posY = 0;
+
+      dom.textWrapper.style.transform = 'translate(0px, 0px)';
+      renderCanvas();
+    });
+
+    // Drag Functionality for Canvas Text
+    let isDragging = false;
+    let startX = 0, startY = 0;
+
+    dom.textWrapper?.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      startX = e.clientX - state.posX;
+      startY = e.clientY - state.posY;
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      if (!isDragging) return;
+      state.posX = e.clientX - startX;
+      state.posY = e.clientY - startY;
+      dom.textWrapper.style.transform = `translate(${state.posX}px, ${state.posY}px)`;
+    });
+
+    window.addEventListener('mouseup', () => {
+      isDragging = false;
+    });
+
+    // Main Render Loop/Function
+    let typewriterInterval = null;
+    let currentTypewriterText = '';
+
+    function renderCanvas() {
+      if (!dom.textTarget) return;
+
+      // Background Opacity Application
+      const currentBgOpacity = state.enableBgOpacity ? state.bgOpacity / 100 : 1;
+      if (dom.canvasBg) dom.canvasBg.style.opacity = currentBgOpacity;
+      if (dom.canvasVideoBg) dom.canvasVideoBg.style.opacity = currentBgOpacity;
+
+      // Typeface & Font Styling
+      dom.textTarget.style.fontFamily = `"${state.typeface}", sans-serif`;
+      dom.textTarget.style.letterSpacing = state.enableKerning ? `${state.kerning}px` : '0px';
+      dom.textTarget.style.fontWeight = state.enableBoldness ? state.boldness : 400;
       dom.textTarget.style.fontStyle = state.isItalic ? 'italic' : 'normal';
-      const scaleXVal = (state.stretch / 100) * (state.isMirrored ? -1 : 1);
-      dom.textWrapper.style.transform = `translate(${state.posX}px, ${state.posY}px) scaleX(${scaleXVal})`;
-      dom.valStretch.textContent = `${state.stretch}%`;
-
-      // 5. Glass Backing Effect
-      if (state.hasGlass) {
-        dom.textWrapper.classList.add('glass-effect-card');
-        dom.textWrapper.style.setProperty('--glass-blur', `${state.glassBlur}px`);
-        dom.textWrapper.style.setProperty('--glass-opacity', `${state.glassOpacity / 100}`);
-        dom.glassControls.classList.remove('hidden');
-      } else {
-        dom.textWrapper.classList.remove('glass-effect-card');
-        dom.glassControls.classList.add('hidden');
-      }
-      dom.valGlassBlur.textContent = `${state.glassBlur}px`;
-      dom.valGlassOpacity.textContent = `${state.glassOpacity}%`;
-
-      // 6. Blur & Drop Shadows
-      dom.valBlur.textContent = `${state.blur}px`;
-      dom.valDsX.textContent = `${state.dsX}px`;
-      dom.valDsY.textContent = `${state.dsY}px`;
-      dom.valDsBlur.textContent = `${state.dsBlur}px`;
-      dom.previewDs.style.backgroundColor = state.dsColor;
-      dom.hexDs.value = state.dsColor;
-
-      const dropShadowCSS = `drop-shadow(${state.dsX}px ${state.dsY}px ${state.dsBlur}px ${state.dsColor})`;
-
-      // 7. Inner Shadow (Rendered via viewport border overlay)
-      dom.valIsX.textContent = `${state.isX}px`;
-      dom.valIsY.textContent = `${state.isY}px`;
-      dom.valIsBlur.textContent = `${state.isBlur}px`;
-      dom.previewIs.style.backgroundColor = state.isColor;
-      dom.hexIs.value = state.isColor;
-
-      if (state.isBlur > 0 || state.isX !== 0 || state.isY !== 0) {
-        dom.innerShadowOverlay.style.boxShadow = `inset ${state.isX}px ${state.isY}px ${state.isBlur}px ${state.isColor}`;
-      } else {
-        dom.innerShadowOverlay.style.boxShadow = 'none';
-      }
-
-      // 8. Colors & Stroke
       dom.textTarget.style.color = state.fillColor;
-      dom.previewFill.style.backgroundColor = state.fillColor;
-      dom.hexFill.value = state.fillColor;
 
-      dom.previewStroke.style.backgroundColor = state.strokeColor;
-      dom.hexStroke.value = state.strokeColor;
-      dom.valStroke.textContent = `${state.strokeWidth}px`;
-
-      if (state.strokeWidth > 0) {
+      // Stroke Options
+      if (state.enableStroke && state.strokeWidth > 0) {
         dom.textTarget.style.webkitTextStroke = `${state.strokeWidth}px ${state.strokeColor}`;
       } else {
         dom.textTarget.style.webkitTextStroke = '0px transparent';
       }
 
-      // 9. Motion & Filter SVG Controls
-      dom.valWarp.textContent = state.warp;
-      dom.valFuzz.textContent = state.fuzziness;
-      dom.valDistortion.textContent = state.distortion;
-      dom.valWave.textContent = state.wave;
+      // Clear previous kinetic animation classes
+      dom.textTarget.classList.remove('anim-blink', 'anim-bounce', 'anim-shake', 'anim-wave', 'anim-rubber', 'anim-swing');
+      if (typewriterInterval) clearInterval(typewriterInterval);
 
-      dom.feDisplacement.setAttribute('scale', state.distortion);
-      dom.feFuzzDisplacement.setAttribute('scale', state.fuzziness);
-      dom.feWarpDisplacement.setAttribute('scale', Math.abs(state.warp));
-
-      // Combine CSS Filters
-      const filterChain = [dropShadowCSS];
-      if (state.blur > 0) filterChain.push(`blur(${state.blur}px)`);
-      if (state.distortion > 0) filterChain.push('url(#svg-distortion-filter)');
-      if (state.fuzziness > 0) filterChain.push('url(#svg-fuzziness-filter)');
-      if (state.warp !== 0) filterChain.push('url(#svg-warp-filter)');
-
-      dom.textTarget.style.filter = filterChain.join(' ');
-
-      // Toggle Active States
-      dom.btnItalic.classList.toggle('bg-indigo-100', state.isItalic);
-      dom.btnItalic.classList.toggle('text-indigo-600', state.isItalic);
-      dom.btnMirror.classList.toggle('bg-indigo-100', state.isMirrored);
-      dom.btnMirror.classList.toggle('text-indigo-600', state.isMirrored);
-      dom.toggleGlass.checked = state.hasGlass;
-      
-      // Canvas background color
-      dom.canvasContainer.style.backgroundColor = state.canvasBgColor;
-    }
-
-    // Animation Loop for Motion Effects
-    let animationTime = 0;
-    function animateMotion() {
-      if (state.wave > 0 || state.fuzziness > 0 || state.distortion > 0) {
-        animationTime += 0.03;
-        
-        if (state.wave > 0) {
-          const waveOffsetY = Math.sin(animationTime * 2) * (state.wave * 0.4);
-          dom.textTarget.style.transform = `translateY(${waveOffsetY}px)`;
-        } else {
-          dom.textTarget.style.transform = 'translateY(0px)';
-        }
-
-        if (state.fuzziness > 0 || state.distortion > 0) {
-          const baseFreq = 0.02 + Math.sin(animationTime) * 0.01;
-          dom.feTurbulence.setAttribute('baseFrequency', `${baseFreq}`);
-        }
+      // Animation Preset Router
+      const preset = state.animPreset;
+      if (preset === 'typewriter') {
+        let charIndex = 0;
+        const fullText = state.text;
+        dom.textTarget.textContent = '';
+        typewriterInterval = setInterval(() => {
+          if (charIndex <= fullText.length) {
+            dom.textTarget.textContent = fullText.slice(0, charIndex);
+            charIndex++;
+          } else {
+            charIndex = 0;
+          }
+        }, 180);
+      } else if (preset === 'trimpath') {
+        dom.textTarget.textContent = state.text;
+        dom.textTarget.style.webkitTextStroke = `${Math.max(state.strokeWidth, 2)}px ${state.strokeColor}`;
+        dom.textTarget.classList.add('anim-blink');
       } else {
-        dom.textTarget.style.transform = 'translateY(0px)';
+        dom.textTarget.textContent = state.text;
+        if (preset !== 'none') {
+          dom.textTarget.classList.add(`anim-${preset}`);
+        }
       }
 
+      // Drop Shadow Calculation with Distance Offset
+      let dropShadowCSS = 'none';
+      if (state.enableDs) {
+        const rad = Math.atan2(state.dsY, state.dsX);
+        const totalX = state.dsX + Math.cos(rad) * state.dsDistance;
+        const totalY = state.dsY + Math.sin(rad) * state.dsDistance;
+        
+        dropShadowCSS = `${totalX}px ${totalY}px ${state.dsBlur}px ${state.dsColor}`;
+        dom.textTarget.style.textShadow = dropShadowCSS;
+
+        // Text Repeater Logic (Multiple Shadow Layer Simulation)
+        if (state.enableRep && state.repCount > 1) {
+          let multiShadows = [dropShadowCSS];
+          for (let i = 1; i < state.repCount; i++) {
+            const rx = totalX + state.repX * i;
+            const ry = totalY + state.repY * i;
+            multiShadows.push(`${rx}px ${ry}px ${state.dsBlur}px ${state.fillColor}`);
+          }
+          dom.textTarget.style.textShadow = multiShadows.join(', ');
+        }
+      } else {
+        dom.textTarget.style.textShadow = 'none';
+      }
+
+      // Transforms (Mirror & Scale Stretch)
+      const currentStretch = state.enableStretch ? state.stretch : 100;
+      const scaleX = (state.isMirrored ? -1 : 1) * (currentStretch / 100);
+      dom.textTarget.style.setProperty('--scale-x', scaleX);
+      dom.textTarget.style.transform = `scale(${scaleX}, 1)`;
+      dom.textTarget.style.display = 'inline-block';
+
+      // Inner Shadow Box Container
+      if (state.enableIs && (state.isBlur > 0 || state.isX !== 0 || state.isY !== 0)) {
+        dom.innerShadowOverlay.style.boxShadow = `inset ${state.isX}px ${state.isY}px ${state.isBlur}px ${state.isColor}`;
+      } else {
+        dom.innerShadowOverlay.style.boxShadow = 'none';
+      }
+
+      // Glass Backing Card Effect
+      if (state.useGlass) {
+        dom.textWrapper.classList.add('glass-effect-card');
+        dom.textWrapper.style.setProperty('--glass-blur', `${state.glassBlur}px`);
+        dom.textWrapper.style.setProperty('--glass-opacity', `${state.glassOpacity / 100}`);
+      } else {
+        dom.textWrapper.classList.remove('glass-effect-card');
+      }
+
+      // Filter Applications (Blur, Distortion, Fuzziness)
+      let filters = [];
+      if (state.enableBlur && state.blur > 0) filters.push(`blur(${state.blur}px)`);
+
+      if (state.enableDistortion && state.distortion > 0) {
+        const disp = document.getElementById('fe-displacement');
+        if (disp) disp.setAttribute('scale', state.distortion);
+        filters.push('url(#svg-distortion-filter)');
+      }
+
+      if (state.enableFuzz && state.fuzziness > 0) {
+        const fuzzDisp = document.getElementById('fe-fuzz-displacement');
+        if (fuzzDisp) fuzzDisp.setAttribute('scale', state.fuzziness);
+        filters.push('url(#svg-fuzziness-filter)');
+      }
+
+      if (state.enableWarp && state.warp !== 0) {
+        const warpDisp = document.getElementById('fe-warp-displacement');
+        if (warpDisp) warpDisp.setAttribute('scale', Math.abs(state.warp));
+        filters.push('url(#svg-warp-filter)');
+      }
+
+      dom.textTarget.style.filter = filters.length > 0 ? filters.join(' ') : 'none';
+    }
+
+    // Animation Wave Motion Loop
+    let waveTime = 0;
+    function animateMotion() {
+      if (state.enableWave && state.wave > 0) {
+        waveTime += 0.05;
+        const waveOffset = Math.sin(waveTime) * state.wave;
+        dom.textTarget.style.marginTop = `${waveOffset}px`;
+      } else if (dom.textTarget) {
+        dom.textTarget.style.marginTop = '0px';
+      }
       requestAnimationFrame(animateMotion);
     }
 
-    // Format Video Timer mm:ss
-    function formatTime(seconds) {
-      const mins = Math.floor(seconds / 60);
-      const secs = Math.floor(seconds % 60);
-      return `${mins < 10 ? '0' : ''}${mins}:${secs < 10 ? '0' : ''}${secs}`;
-    }
-
-    // Event Listeners setup
-    function initListeners() {
-      // Accordion Toggle
-      document.querySelectorAll('.accordion-header').forEach(header => {
-        header.addEventListener('click', () => {
-          const content = header.nextElementSibling;
-          const icon = header.querySelector('.fa-chevron-down');
-          content.classList.toggle('open');
-          if (icon) icon.style.transform = content.classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)';
-        });
-      });
-
-      // Text Input
-      dom.textInput.addEventListener('input', (e) => {
-        state.text = e.target.value;
-        render();
-      });
-
-      // Typeface Selector
-      dom.typefaceSelect.addEventListener('change', (e) => {
-        state.typeface = e.target.value;
-        updateGoogleFontLink(state.typeface);
-        render();
-      });
-
-      // Sliders & Controls
-      dom.sliderKerning.addEventListener('input', (e) => { state.kerning = parseFloat(e.target.value); render(); });
-      dom.sliderBoldness.addEventListener('input', (e) => { state.boldness = parseInt(e.target.value); render(); });
-      dom.sliderBlur.addEventListener('input', (e) => { state.blur = parseFloat(e.target.value); render(); });
-      dom.sliderStroke.addEventListener('input', (e) => { state.strokeWidth = parseFloat(e.target.value); render(); });
-      
-      // Glass
-      dom.toggleGlass.addEventListener('change', (e) => { state.hasGlass = e.target.checked; render(); });
-      dom.sliderGlassBlur.addEventListener('input', (e) => { state.glassBlur = parseInt(e.target.value); render(); });
-      dom.sliderGlassOpacity.addEventListener('input', (e) => { state.glassOpacity = parseInt(e.target.value); render(); });
-
-      // Drop Shadow
-      dom.sliderDsX.addEventListener('input', (e) => { state.dsX = parseInt(e.target.value); render(); });
-      dom.sliderDsY.addEventListener('input', (e) => { state.dsY = parseInt(e.target.value); render(); });
-      dom.sliderDsBlur.addEventListener('input', (e) => { state.dsBlur = parseInt(e.target.value); render(); });
-      dom.pickerDs.addEventListener('input', (e) => { state.dsColor = e.target.value; render(); });
-
-      // Inner Shadow
-      dom.sliderIsX.addEventListener('input', (e) => { state.isX = parseInt(e.target.value); render(); });
-      dom.sliderIsY.addEventListener('input', (e) => { state.isY = parseInt(e.target.value); render(); });
-      dom.sliderIsBlur.addEventListener('input', (e) => { state.isBlur = parseInt(e.target.value); render(); });
-      dom.pickerIs.addEventListener('input', (e) => { state.isColor = e.target.value; render(); });
-
-      // Modify & Motion
-      dom.sliderStretch.addEventListener('input', (e) => { state.stretch = parseInt(e.target.value); render(); });
-      dom.sliderWarp.addEventListener('input', (e) => { state.warp = parseInt(e.target.value); render(); });
-      dom.sliderFuzz.addEventListener('input', (e) => { state.fuzziness = parseInt(e.target.value); render(); });
-      dom.sliderDistortion.addEventListener('input', (e) => { state.distortion = parseInt(e.target.value); render(); });
-      dom.sliderWave.addEventListener('input', (e) => { state.wave = parseInt(e.target.value); render(); });
-
-      // Toggles
-      dom.btnItalic.addEventListener('click', () => { state.isItalic = !state.isItalic; render(); });
-      dom.btnMirror.addEventListener('click', () => { state.isMirrored = !state.isMirrored; render(); });
-
-      // Color Pickers
-      dom.pickerFill.addEventListener('input', (e) => { state.fillColor = e.target.value; render(); });
-      dom.pickerStroke.addEventListener('input', (e) => { state.strokeColor = e.target.value; render(); });
-      
-      // Background Color
-      dom.pickerBg.addEventListener('input', (e) => {
-        state.canvasBgColor = e.target.value;
-        dom.hexBg.value = e.target.value.toUpperCase();
-        render();
-      });
-      dom.btnClearBg.addEventListener('click', () => {
-        dom.canvasBg.style.backgroundImage = 'none';
-        dom.videoBg.pause();
-        dom.videoBg.classList.add('hidden');
-        dom.videoControlsPanel.classList.add('opacity-50', 'pointer-events-none');
-        state.isVideoLoaded = false;
-      });
-
-      // Drag & Drop
-      let isDragging = false, startX, startY;
-      dom.textWrapper.addEventListener('mousedown', (e) => {
-        isDragging = true;
-        startX = e.clientX - state.posX;
-        startY = e.clientY - state.posY;
-        dom.textWrapper.classList.remove('transition-transform');
-      });
-      window.addEventListener('mousemove', (e) => {
-        if (!isDragging) return;
-        state.posX = e.clientX - startX;
-        state.posY = e.clientY - startY;
-        render();
-      });
-      window.addEventListener('mouseup', () => {
-        if (isDragging) {
-          isDragging = false;
-          dom.textWrapper.classList.add('transition-transform');
-        }
-      });
-
-      // Asset Upload (Images, Video, Audio, Fonts)
-      dom.assetUpload.addEventListener('change', (e) => {
-        const file = e.target.files[0];
-        if (!file) return;
-
-        if (file.type.startsWith('video/') || file.type.startsWith('audio/')) {
-          const url = URL.createObjectURL(file);
-          dom.videoBg.src = url;
-          dom.videoBg.classList.remove('hidden');
-          dom.videoControlsPanel.classList.remove('opacity-50', 'pointer-events-none');
-          dom.videoBg.play();
-          dom.btnVideoPlay.innerHTML = '<i class="fa-solid fa-pause text-xs"></i>';
-          state.isVideoLoaded = true;
-        } else if (file.type.startsWith('image/')) {
-          const reader = new FileReader();
-          reader.onload = (event) => {
-            dom.canvasBg.style.backgroundImage = `url(${event.target.result})`;
-            dom.videoBg.classList.add('hidden');
-          };
-          reader.readAsDataURL(file);
-        } else if (file.name.match(/\.(ttf|otf|woff|woff2)$/i)) {
-          const fontName = 'CustomFont_' + Date.now();
-          const reader = new FileReader();
-          reader.onload = (event) => {
-            const font = new FontFace(fontName, event.target.result);
-            font.load().then((loadedFont) => {
-              document.fonts.add(loadedFont);
-              state.typeface = fontName;
-              const opt = document.createElement('option');
-              opt.value = fontName;
-              opt.textContent = `Custom (${file.name})`;
-              dom.typefaceSelect.appendChild(opt);
-              dom.typefaceSelect.value = fontName;
-              render();
-            });
-          };
-          reader.readAsArrayBuffer(file);
-        }
-      });
-
-      // Video Controls Logic
-      dom.btnVideoPlay.addEventListener('click', () => {
-        if (dom.videoBg.paused) {
-          dom.videoBg.play();
-          dom.btnVideoPlay.innerHTML = '<i class="fa-solid fa-pause text-xs"></i>';
-        } else {
-          dom.videoBg.pause();
-          dom.btnVideoPlay.innerHTML = '<i class="fa-solid fa-play text-xs"></i>';
-        }
-      });
-
-      dom.videoBg.addEventListener('timeupdate', () => {
-        if (!dom.videoBg.duration) return;
-        const pct = (dom.videoBg.currentTime / dom.videoBg.duration) * 100;
-        dom.videoTimeline.value = pct;
-        dom.videoTimeDisplay.textContent = formatTime(dom.videoBg.currentTime);
-      });
-
-      dom.videoTimeline.addEventListener('input', (e) => {
-        if (!dom.videoBg.duration) return;
-        dom.videoBg.currentTime = (e.target.value / 100) * dom.videoBg.duration;
-      });
-
-      dom.videoVolume.addEventListener('input', (e) => {
-        dom.videoBg.volume = e.target.value;
-      });
-
-      dom.btnVideoLoop.addEventListener('click', () => {
-        state.isVideoLooping = !state.isVideoLooping;
-        dom.videoBg.loop = state.isVideoLooping;
-        dom.btnVideoLoop.classList.toggle('bg-indigo-100', state.isVideoLooping);
-      });
-
-      // Presets
-      document.querySelectorAll('.preset-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-          const preset = btn.dataset.preset;
-          if (preset === 'clean') {
-            state.hasGlass = false;
-            state.stretch = 100;
-            state.warp = 0;
-            state.fuzziness = 0;
-            state.distortion = 0;
-            state.wave = 0;
-            state.dsBlur = 0;
-            state.fillColor = '#334155';
-          } else if (preset === 'glass') {
-            state.hasGlass = true;
-            state.glassBlur = 16;
-            state.glassOpacity = 30;
-            state.stretch = 105;
-            state.fillColor = '#1e293b';
-            state.dsBlur = 20;
-            state.dsY = 10;
-          } else if (preset === 'glitch') {
-            state.hasGlass = false;
-            state.fuzziness = 20;
-            state.distortion = 30;
-            state.warp = 15;
-            state.stretch = 120;
-            state.strokeWidth = 2;
-            state.strokeColor = '#ec4899';
-          }
-          dom.sliderStretch.value = state.stretch;
-          dom.sliderWarp.value = state.warp;
-          dom.sliderFuzz.value = state.fuzziness;
-          dom.sliderDistortion.value = state.distortion;
-          render();
-        });
-      });
-
-      // Reset Button
-      dom.resetBtn.addEventListener('click', () => {
-        state.text = 'TYPOGRAPHY';
-        state.typeface = 'Space Grotesk';
-        state.kerning = 4;
-        state.boldness = 700;
-        state.isItalic = false;
-        state.isMirrored = false;
-        state.blur = 0;
-        state.hasGlass = false;
-        state.stretch = 100;
-        state.warp = 0;
-        state.fuzziness = 0;
-        state.distortion = 0;
-        state.wave = 0;
-        state.dsX = 0; state.dsY = 8; state.dsBlur = 15;
-        state.isX = 0; state.isY = 4; state.isBlur = 10;
-        state.posX = 0; state.posY = 0;
-        
-        dom.textInput.value = state.text;
-        dom.typefaceSelect.value = state.typeface;
-        render();
-      });
-    }
-
-    window.onload = () => {
-      initListeners();
-      render();
+    // Initialize Canvas on Page Load
+    window.addEventListener('load', () => {
+      renderCanvas();
       animateMotion();
-    };
+    });
   </script>
 </body>
 </html>
