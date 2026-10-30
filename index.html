@@ -224,15 +224,40 @@
   <!-- LEFT SIDEBAR PANEL -->
   <aside class="w-full md:w-80 lg:w-96 flex-shrink-0 p-4 md:p-6 flex flex-col gap-4 max-h-screen overflow-y-auto">
     
-    <!-- TOP ACTION ROW - MATCHING ORIGINAL WIREFRAME UPLOAD BUTTON -->
-    <div class="flex items-center justify-end gap-3 pr-2">
-      <label class="upload-pill-btn cursor-pointer px-6 py-2 text-sm font-normal text-slate-600 flex items-center justify-center gap-2">
+    <!-- TOP ACTION ROW - MATCHING ORIGINAL WIREFRAME UPLOAD & EXPORT BUTTONS -->
+    <div class="flex items-center justify-end gap-2 pr-2 relative">
+      <label class="upload-pill-btn cursor-pointer px-5 py-2 text-xs md:text-sm font-normal text-slate-600 flex items-center justify-center gap-2">
         <span>Upload</span>
         <input type="file" id="asset-upload" accept="image/*,video/mp4,video/webm,video/quicktime,image/gif,audio/wav,audio/*,.ttf,.otf,.woff,.woff2" class="hidden">
       </label>
+
+      <!-- EXPORT BUTTON & DROPDOWN MENU -->
+      <div class="relative">
+        <button id="export-pill-btn" class="upload-pill-btn px-5 py-2 text-xs md:text-sm font-normal text-slate-600 flex items-center justify-center gap-2">
+          <span>Export</span>
+          <i class="fa-solid fa-download text-[11px] text-slate-400"></i>
+        </button>
+
+        <!-- Export Format Selection Dropdown Popover -->
+        <div id="export-menu" class="hidden absolute right-0 mt-2 w-44 soft-card rounded-2xl p-2 shadow-xl border border-white/80 z-50 flex flex-col gap-1">
+          <div class="text-[10px] font-semibold text-slate-400 uppercase tracking-wider px-3 py-1">Format Options</div>
+          <button id="export-png-btn" class="w-full text-left px-3 py-1.5 text-xs font-medium text-slate-700 hover:bg-white/80 rounded-xl flex items-center justify-between transition-all">
+            <span>PNG Image</span>
+            <i class="fa-regular fa-image text-indigo-400"></i>
+          </button>
+          <button id="export-gif-btn" class="w-full text-left px-3 py-1.5 text-xs font-medium text-slate-700 hover:bg-white/80 rounded-xl flex items-center justify-between transition-all">
+            <span>GIF Animation</span>
+            <i class="fa-solid fa-film text-purple-400"></i>
+          </button>
+          <button id="export-mp4-btn" class="w-full text-left px-3 py-1.5 text-xs font-medium text-slate-700 hover:bg-white/80 rounded-xl flex items-center justify-between transition-all">
+            <span>MP4 Video</span>
+            <i class="fa-solid fa-video text-teal-400"></i>
+          </button>
+        </div>
+      </div>
       
-      <button id="reset-btn" title="Reset Controls" class="soft-button p-2.5 rounded-full text-slate-500 hover:text-indigo-600">
-        <i class="fa-solid fa-rotate-left"></i>
+      <button id="reset-btn" title="Reset Controls" class="soft-button p-2 rounded-full text-slate-500 hover:text-indigo-600 ml-1">
+        <i class="fa-solid fa-rotate-left text-xs"></i>
       </button>
     </div>
 
@@ -959,6 +984,13 @@
       assetUpload: document.getElementById('asset-upload'),
       resetBtn: document.getElementById('reset-btn'),
       
+      // Export Controls DOM References
+      exportPillBtn: document.getElementById('export-pill-btn'),
+      exportMenu: document.getElementById('export-menu'),
+      exportPngBtn: document.getElementById('export-png-btn'),
+      exportGifBtn: document.getElementById('export-gif-btn'),
+      exportMp4Btn: document.getElementById('export-mp4-btn'),
+
       canvasContainer: document.getElementById('canvas-container'),
       canvasBg: document.getElementById('custom-canvas-bg'),
       canvasVideoBg: document.getElementById('canvas-video-bg'),
@@ -1160,6 +1192,141 @@
         
         renderCanvas();
       });
+    });
+
+    // Export Menu Toggle
+    dom.exportPillBtn?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      dom.exportMenu?.classList.toggle('hidden');
+    });
+
+    window.addEventListener('click', () => {
+      if (!dom.exportMenu?.classList.contains('hidden')) {
+        dom.exportMenu?.classList.add('hidden');
+      }
+    });
+
+    // Helper: Canvas Rasterizer using HTML5 Canvas & SVG Rendering
+    function generateCanvasRenderBlob(format, durationMs = 2000) {
+      const container = dom.canvasContainer;
+      const rect = container.getBoundingClientRect();
+      const canvas = document.createElement('canvas');
+      canvas.width = rect.width * 2;
+      canvas.height = rect.height * 2;
+      const ctx = canvas.getContext('2d');
+
+      // Export indicator UI feedback
+      const origText = dom.exportPillBtn.querySelector('span').textContent;
+      dom.exportPillBtn.querySelector('span').textContent = 'Exporting...';
+
+      if (format === 'png') {
+        // PNG Snap
+        const textTarget = dom.textTarget;
+        const computedStyle = window.getComputedStyle(textTarget);
+        
+        ctx.scale(2, 2);
+        ctx.fillStyle = state.canvasBgColor || '#FFFFFF';
+        ctx.fillRect(0, 0, rect.width, rect.height);
+
+        ctx.font = `${state.isItalic ? 'italic ' : ''}${state.enableBoldness ? state.boldness : 400} ${computedStyle.fontSize} "${state.typeface}"`;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        
+        if (state.enableStroke && state.strokeWidth > 0) {
+          ctx.strokeStyle = state.strokeColor;
+          ctx.lineWidth = state.strokeWidth * 2;
+          ctx.strokeText(state.text, rect.width / 2 + state.posX, rect.height / 2 + state.posY);
+        }
+
+        ctx.fillStyle = state.fillColor;
+        ctx.fillText(state.text, rect.width / 2 + state.posX, rect.height / 2 + state.posY);
+
+        const a = document.createElement('a');
+        a.download = `typography-design-${Date.now()}.png`;
+        a.href = canvas.toDataURL('image/png');
+        a.click();
+
+        dom.exportPillBtn.querySelector('span').textContent = origText;
+      } else if (format === 'mp4' || format === 'gif') {
+        // Animated Canvas Video/GIF Stream Recording
+        ctx.fillStyle = state.canvasBgColor || '#FFFFFF';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        const stream = canvas.captureStream(30);
+        let recorder;
+        try {
+          recorder = new MediaRecorder(stream, { mimeType: 'video/webm' });
+        } catch (err) {
+          recorder = new MediaRecorder(stream);
+        }
+
+        const chunks = [];
+        recorder.ondataavailable = e => chunks.push(e.data);
+        recorder.onstop = () => {
+          const blob = new Blob(chunks, { type: 'video/webm' });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.download = `kinetic-typography-${Date.now()}.${format === 'mp4' ? 'mp4' : 'gif'}`;
+          a.href = url;
+          a.click();
+          dom.exportPillBtn.querySelector('span').textContent = origText;
+        };
+
+        recorder.start();
+
+        // Render loop for animation duration
+        let startTime = performance.now();
+        function drawFrame(now) {
+          const elapsed = now - startTime;
+          ctx.fillStyle = state.canvasBgColor || '#FFFFFF';
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+          const computedStyle = window.getComputedStyle(dom.textTarget);
+          ctx.save();
+          ctx.scale(2, 2);
+
+          let animOffsetY = 0;
+          if (state.enableWave && state.wave > 0) {
+            animOffsetY = Math.sin(elapsed / 200) * state.wave;
+          }
+
+          ctx.font = `${state.isItalic ? 'italic ' : ''}${state.enableBoldness ? state.boldness : 400} ${computedStyle.fontSize} "${state.typeface}"`;
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+
+          if (state.enableStroke && state.strokeWidth > 0) {
+            ctx.strokeStyle = state.strokeColor;
+            ctx.lineWidth = state.strokeWidth * 2;
+            ctx.strokeText(state.text, rect.width / 2 + state.posX, rect.height / 2 + state.posY + animOffsetY);
+          }
+
+          ctx.fillStyle = state.fillColor;
+          ctx.fillText(state.text, rect.width / 2 + state.posX, rect.height / 2 + state.posY + animOffsetY);
+          ctx.restore();
+
+          if (elapsed < durationMs) {
+            requestAnimationFrame(drawFrame);
+          } else {
+            recorder.stop();
+          }
+        }
+        requestAnimationFrame(drawFrame);
+      }
+    }
+
+    dom.exportPngBtn?.addEventListener('click', () => {
+      dom.exportMenu?.classList.add('hidden');
+      generateCanvasRenderBlob('png');
+    });
+
+    dom.exportGifBtn?.addEventListener('click', () => {
+      dom.exportMenu?.classList.add('hidden');
+      generateCanvasRenderBlob('gif', 3000);
+    });
+
+    dom.exportMp4Btn?.addEventListener('click', () => {
+      dom.exportMenu?.classList.add('hidden');
+      generateCanvasRenderBlob('mp4', 4000);
     });
 
     // Media Upload Handling
